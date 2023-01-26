@@ -1,0 +1,125 @@
+#sectionHome {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.nublado{
+    background-color: #1b5c9d;
+}
+#mainContent{
+    height: 350px;
+    width: 700px;
+    border-radius: 1.5rem;
+    background-color: rgb(250, 250, 250,20%);
+    backdrop-filter: blur(2px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+}
+
+#cima {
+    height: 100px;
+    width: 100%;
+    border: 2px solid orange;
+    border-radius: 1rem;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+#baixo{
+    padding: 10px;
+    border: 2px solid yellow;
+    height: 200px;
+    border-radius: 1rem;
+}
+#imgHoje{
+    width: 60px;
+}
+#climaHoje{
+    width: 280px;
+    border: 2px solid red;
+    border-radius: 0.8rem;
+}
+#climaAmanha{
+    border: 2px solid yellow;
+    width: 150px;
+    border-radius: 0.8rem;
+}
+#asideContent{
+    width: 500px;
+    height: 350px;
+    border: 2px solid red;
+    border-radius: 1.5rem;
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+
+
+    flex-direction: column;
+
+}
+#nomeCidade{
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#temperaturaContainer{
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+}
+#mensagemDia{
+    padding-left: 20px;
+}
+#txtTemperatura{
+    font-size: 5rem;
+}
+#nublado{
+    width: 7rem;
+}
+
+#temperaturaContent{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+#mensagemClimaContainer{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#informacoesContainer{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+.itemsInfo{
+    height: 100%;
+    width: 120px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#mensagemDiaContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mensagemDia{
+    width: 98%;
+}
