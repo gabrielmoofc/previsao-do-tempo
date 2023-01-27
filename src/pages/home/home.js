@@ -49,16 +49,27 @@ export default function Home() {
             </div>
         </main>
         <aside id='asideContent'>
-           <div id='cima'>
+           <div id='cimaAside'>
                 <div id='climaHoje'>
-                    <h1>Hoje</h1>
-                    <img id='imgHoje' src={nublado}/>
+                    <div id='tituloDia'>
+                        <h4>Hoje</h4>
+                    </div>
+                    <div id='contentDia'>
+                        <div id='tempAtual'>
+                            <img id='imgHoje' src={nublado}/>
+                            <div id='grausHoje'>
+                                <h4>34°</h4>
+                                <h4>23°</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div id='climaAmanha'>
 
                 </div>
             </div>
-            <div id='baixo'>
+            <div id='baixoAside'>
                 teste
             </div> 
         </aside>

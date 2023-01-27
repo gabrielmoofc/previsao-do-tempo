@@ -20,8 +20,8 @@
     color: white;
 }
 
-#cima {
-    height: 100px;
+#cimaAside {
+    height: 120px;
     width: 100%;
     border: 2px solid orange;
     border-radius: 1rem;
@@ -30,23 +30,32 @@
     justify-content: space-evenly;
     
 }
-#baixo{
+#baixoAside{
     padding: 10px;
     border: 2px solid yellow;
-    height: 200px;
+    height: 180px;
     border-radius: 1rem;
 }
 #imgHoje{
-    width: 60px;
+    width: 40px;
 }
 #climaHoje{
-    width: 280px;
-    border: 2px solid red;
+    width: 250px;
+    border: 2px solid yellow;
     border-radius: 0.8rem;
+    padding: 5px;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#tituloDia{
+    border: 2px solid red;
+
 }
 #climaAmanha{
     border: 2px solid yellow;
-    width: 150px;
+    width: 185px;
     border-radius: 0.8rem;
 }
 #asideContent{
@@ -122,4 +131,16 @@
 
 #mensagemDia{
     width: 98%;
+}
+
+#contentDia{
+    display: flex;
+    border: 2px solid pink;
+}
+
+#tempAtual {
+    border: 2px solid red;
+    display: flex;
+    width: 85px;
+    justify-content: space-around;
 }
