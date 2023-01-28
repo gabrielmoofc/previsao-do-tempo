@@ -1,0 +1,52 @@
+.cidadeAdicionadaContainer{
+    height: 100%;
+    width: 315px;
+    border-left: 0.1em solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cidadeAdicionada{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.cidadeAdicionadaContainer:hover{
+    background-color: rgba(189, 181, 181, 0.2);
+    backdrop-filter: blur(2px);
+    transition: 1s;
+}
+
+.imgCidadeAdd{
+    width: 35px;
+}
+
+.infoCidade {
+    height: 100%;
+    display: flex;
+}
+.nomeCidadeAdd{
+    height: 100%;
+    width: 130px;
+    display: flex;
+    align-items: center;
+}
+.tempAtualCidadeAdd{
+    height: 100%;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.toolIcone{
+
+}
+
+#more_vert{
+    width: 30px;
+}
