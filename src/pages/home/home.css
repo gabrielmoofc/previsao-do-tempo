@@ -30,7 +30,7 @@
     width: 100%;
     height: 80px;
     display: flex;
-    border-bottom: 0.1em solid gray;
+    border-bottom: 0.1em solid #f2f2f2;
 }
 
 #pesquisa{
