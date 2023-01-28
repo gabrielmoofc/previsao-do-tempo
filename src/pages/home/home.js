@@ -4,7 +4,8 @@ import nublado from "../../assets/img/nublado.svg";
 import CidadePesquisa from "../../components/CidadePesquisa/CidadePesquisa";
 import SearchIcon from "@mui/icons-material/Search";
 import clearNight from "../../assets/img/ClearNightV3.svg";
-import Thunderstorms from "../../assets/img/ClearNightV3.svg";
+import Thunderstorms from "../../assets/img/ThunderstormsV2.svg";
+import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
 
 export default function Home() {
   return (
@@ -92,24 +93,61 @@ export default function Home() {
           </div>
         </div>
         <aside id="asideContent">
-          <div id="cimaAside">
-            <div id="climaHoje">
-              <div id="tituloDia">
-                <h4>Hoje</h4>
+          <div id="asideMain">
+            <div id="tituloAside">
+              <h3>Previsão da semana</h3>
+            </div>
+            <div id="containerDias">
+              <div className="linha">
+                <PrevisaoSemana
+                  dia="Hoje"
+                  imgDia={clearNight}
+                  tempMaxima="30"
+                  tempMinima="21"
+                  info="Noite Clara"
+                />
+                <PrevisaoSemana
+                  dia="Amanhã"
+                  imgDia={nublado}
+                  tempMaxima="25"
+                  tempMinima="21"
+                  info="Nublado"
+                />
               </div>
-              <div id="contentDia">
-                <div id="tempAtual">
-                  <img id="imgHoje" src={nublado} />
-                  <div id="grausHoje">
-                    <h4>34°</h4>
-                    <h4>23°</h4>
-                  </div>
-                </div>
+              <div className="linha">
+                <PrevisaoSemana
+                  dia="30/01"
+                  imgDia={Thunderstorms}
+                  tempMaxima="20"
+                  tempMinima="19"
+                  info="Tempestade"
+                />
+                <PrevisaoSemana
+                  dia="31/01"
+                  imgDia={Thunderstorms}
+                  tempMaxima="25"
+                  tempMinima="19"
+                  info="Chuvas rápidas"
+                />
+              </div>
+              <div className="linha">
+                <PrevisaoSemana
+                  dia="01/02"
+                  imgDia={nublado}
+                  tempMaxima="30"
+                  tempMinima="25"
+                  info="Dia Nublado"
+                />
+                <PrevisaoSemana
+                  dia="02/02"
+                  imgDia={clearNight}
+                  tempMaxima="30"
+                  tempMinima="21"
+                  info="Noite Clara"
+                />
               </div>
             </div>
-            <div id="climaAmanha"></div>
           </div>
-          <div id="baixoAside">teste</div>
         </aside>
       </main>
     </section>
