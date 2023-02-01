@@ -21,6 +21,7 @@ export default function Home() {
   const [pressao, setPressao] = useState("")
   const [vento, setVento] = useState("")
   const [sensacaoTerm, setSensacaoTerm] = useState("")
+  const [icone, setIcone] = useState("")
   const cidades = []
 
   const getCidadePadrao = async () => {
@@ -50,7 +51,7 @@ export default function Home() {
     setPressao(cidadePadrao.pressao)
     setVento(cidadePadrao.vento)
     setSensacaoTerm(cidadePadrao.sensacaoTermica)
-
+    setIcone(`https://openweathermap.org/img/wn/${cidadePadrao.icone}.png`)
     console.log(cidadePadrao.nome)
 
   }
@@ -129,7 +130,7 @@ export default function Home() {
             </div>
             <div id="temperaturaContainer">
               <div id="temperaturaContent">
-                <img id="nublado" src={nublado} />
+                <img id="nublado" src={icone} />
                 <h1 id="txtTemperatura">{temp}°C</h1>
               </div>
               <div id="mensagemClimaContainer">
