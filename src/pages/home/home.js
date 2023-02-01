@@ -8,7 +8,7 @@ import Thunderstorms from "../../assets/img/ThunderstormsV2.svg";
 import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
 
 export default function Home() {
-  const key = "";
+  const key = "28f27af27b41db971000c8cc82329bfb";
   const [cidadePesquisar, setCidade] = useState("");
 
   const [nomeCidade, setNomeCidade] = useState("");
@@ -22,13 +22,18 @@ export default function Home() {
   const [vento, setVento] = useState("")
   const [sensacaoTerm, setSensacaoTerm] = useState("")
   const [icone, setIcone] = useState("")
-  const cidades = []
 
+  let cidades = []
+
+  function pegarArr() {
+    console.log(cidades)
+  }
   const getCidadePadrao = async () => {
     const cidadeInicial = 'São Paulo'
     const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadeInicial}&units=metric&appid=${key}&lang=pt_br`;
     const res = await fetch(api);
     const data = await res.json();
+
     const cidadePadrao = {
       nome: data.name,
       pais: data.sys.country,
@@ -41,24 +46,25 @@ export default function Home() {
       sensacaoTermica: data.main.feels_like,
       descricao: data.weather[0].description,
       icone: data.weather[0].icon,
+
     };
 
-    setNomeCidade(cidadePadrao.nome)
-    setPais(cidadePadrao.pais)
-    setTemp(cidadePadrao.tempAtual)
-    setDescricao(cidadePadrao.descricao)
-    setUmidade(cidadePadrao.umidade)
-    setPressao(cidadePadrao.pressao)
-    setVento(cidadePadrao.vento)
-    setSensacaoTerm(cidadePadrao.sensacaoTermica)
-    setIcone(`https://openweathermap.org/img/wn/${cidadePadrao.icone}.png`)
-    console.log(cidadePadrao.nome)
+    cidades.unshift(cidadePadrao)
 
+    setNomeCidade(cidades[0].nome)
+    setPais(cidades[0].pais)
+    setTemp(cidades[0].tempAtual)
+    setDescricao(cidades[0].descricao)
+    setUmidade(cidades[0].umidade)
+    setPressao(cidades[0].pressao)
+    setVento(cidades[0].vento)
+    setSensacaoTerm(cidades[0].sensacaoTermica)
+    setIcone(`https://openweathermap.org/img/wn/${cidades[0].icone}.png`)
   }
 
   useEffect(() => {
-    getCidadePadrao()
-  })
+  getCidadePadrao()
+  }, [])
   
   const getWeather = async () => {
     console.log("iniciando");
@@ -67,7 +73,7 @@ export default function Home() {
 
     const res = await fetch(api);
     const data = await res.json();
-    const cidade = {
+    const cidadeAdd = {
       nome: data.name,
       pais: data.sys.country,
       tempAtual: data.main.temp,
@@ -80,12 +86,24 @@ export default function Home() {
       descricao: data.weather[0].description,
       icone: data.weather[0].icon,
     };
-    cidades.unshift(cidade)
-    console.log(cidades);
+    cidades.unshift(cidadeAdd)
+
+    setNomeCidade(cidades[0].nome)
+    setPais(cidades[0].pais)
+    setTemp(cidades[0].tempAtual)
+    setDescricao(cidades[0].descricao)
+    setUmidade(cidades[0].umidade)
+    setPressao(cidades[0].pressao)
+    setVento(cidades[0].vento)
+    setSensacaoTerm(cidades[0].sensacaoTermica)
+    setIcone(`https://openweathermap.org/img/wn/${cidades[0].icone}.png`)
+    pegarArr()
+
+
   };
 
   return (
-    <section id="sectionHome" className="nublado" usee>
+    <section id="sectionHome" className="nublado" >
       <nav id="header">
         <div id="pesquisa">
           <div id="containerPesquisar">
@@ -96,7 +114,7 @@ export default function Home() {
               value={cidadePesquisar}
               onChange={(e) => setCidade(e.target.value)}
             />
-            <label id="label" onClick={getWeather}>
+            <label id="label" onClick={getWeather} >
               <div id="containerIconePesquisa">
                 <SearchIcon id="iconePesquisa" />
               </div>
