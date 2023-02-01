@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./home.css";
 import nublado from "../../assets/img/nublado.svg";
 import CidadePesquisa from "../../components/CidadePesquisa/CidadePesquisa";
@@ -8,6 +8,32 @@ import Thunderstorms from "../../assets/img/ThunderstormsV2.svg";
 import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
 
 export default function Home() {
+  const key = "";
+  const city = "Dourados";
+  const [cidadePesquisar, setCidade] = useState("São Paulo");
+
+  const getWeather = async () => {
+    console.log("iniciando");
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadePesquisar}&units=metric&appid=${key}&lang=pt_br`;
+
+    const res = await fetch(api);
+    const data = await res.json();
+    const cidade = {
+      nome: data.name,
+      pais: data.sys.country,
+      tempAtual: data.main.temp,
+      tempMax: data.main.temp_max,
+      tempMin: data.main.temp_min,
+      umidade: data.main.humidity,
+      pressao: data.main.pressure,
+      vento: data.wind.speed,
+      sensacaoTermica: data.main.feels_like,
+      descricao: data.weather[0].description,
+      icone: data.weather[0].icon,
+    };
+    console.log(cidade);
+  };
+
   return (
     <section id="sectionHome" className="nublado">
       <nav id="header">
@@ -17,8 +43,10 @@ export default function Home() {
               id="inputPesquisa"
               placeholder="Pesquisar por local"
               name="pesquisarCidade"
+              value={cidadePesquisar}
+              onChange={(e) => setCidade(e.target.value)}
             />
-            <label id="label " for="inputPesquisa">
+            <label id="label " for="inputPesquisa" onClick={getWeather}>
               <div id="containerIconePesquisa">
                 <SearchIcon id="iconePesquisa" />
               </div>
