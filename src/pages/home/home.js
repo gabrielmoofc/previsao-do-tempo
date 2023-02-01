@@ -8,7 +8,7 @@ import Thunderstorms from "../../assets/img/ThunderstormsV2.svg";
 import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
 
 export default function Home() {
-  const key = "f8408bfebc0041f47c06d286ba7aa64f";
+  const key = "";
   const [cidadePesquisar, setCidade] = useState("");
 
   const [nomeCidade, setNomeCidade] = useState("");
@@ -54,10 +54,11 @@ export default function Home() {
     console.log(cidadePadrao.nome)
 
   }
+
   useEffect(() => {
-    console.log('useeffec')
     getCidadePadrao()
   })
+  
   const getWeather = async () => {
     console.log("iniciando");
     
