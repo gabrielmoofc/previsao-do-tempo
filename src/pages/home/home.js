@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import nublado from "../../assets/img/nublado.svg";
 import CidadePesquisa from "../../components/CidadePesquisa/CidadePesquisa";
@@ -9,11 +9,36 @@ import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
 
 export default function Home() {
   const key = "";
-  const city = "Dourados";
-  const [cidadePesquisar, setCidade] = useState("São Paulo");
+  const [cidadePesquisar, setCidade] = useState("");
 
+  const cidades = []
+
+  const getCidadePadrao = async () => {
+    const cidadePadrao = 'São Paulo'
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadePadrao}&units=metric&appid=${key}&lang=pt_br`;
+    const res = await fetch(api);
+    const data = await res.json();
+    const cidade = {
+      nome: data.name,
+      pais: data.sys.country,
+      tempAtual: data.main.temp,
+      tempMax: data.main.temp_max,
+      tempMin: data.main.temp_min,
+      umidade: data.main.humidity,
+      pressao: data.main.pressure,
+      vento: data.wind.speed,
+      sensacaoTermica: data.main.feels_like,
+      descricao: data.weather[0].description,
+      icone: data.weather[0].icon,
+    };
+    console.log(cidade)
+  }
+  useEffect() => {
+    
+  }
   const getWeather = async () => {
     console.log("iniciando");
+    
     const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadePesquisar}&units=metric&appid=${key}&lang=pt_br`;
 
     const res = await fetch(api);
@@ -31,11 +56,12 @@ export default function Home() {
       descricao: data.weather[0].description,
       icone: data.weather[0].icon,
     };
-    console.log(cidade);
+    cidades.unshift(cidade)
+    console.log(cidades);
   };
 
   return (
-    <section id="sectionHome" className="nublado">
+    <section id="sectionHome" className="nublado" usee>
       <nav id="header">
         <div id="pesquisa">
           <div id="containerPesquisar">
@@ -75,7 +101,7 @@ export default function Home() {
         <div id="mainLayout">
           <div id="mainContent">
             <div id="nomeCidade">
-              <h1>Dourados, MS, Brasil</h1>
+              <h1>{cidades[0]}, Brasil</h1>
               <h3>12:30 PM</h3>
             </div>
             <div id="temperaturaContainer">
