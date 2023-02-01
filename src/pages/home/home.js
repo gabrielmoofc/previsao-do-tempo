@@ -8,17 +8,27 @@ import Thunderstorms from "../../assets/img/ThunderstormsV2.svg";
 import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
 
 export default function Home() {
-  const key = "";
+  const key = "f8408bfebc0041f47c06d286ba7aa64f";
   const [cidadePesquisar, setCidade] = useState("");
 
+  const [nomeCidade, setNomeCidade] = useState("");
+  const [pais, setPais] = useState("");
+  const [temp, setTemp] = useState("");
+  const [tempMax, setTempMax] = useState("");
+  const [tempMin, setTempMin] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [umidade, setUmidade] = useState("");
+  const [pressao, setPressao] = useState("")
+  const [vento, setVento] = useState("")
+  const [sensacaoTerm, setSensacaoTerm] = useState("")
   const cidades = []
 
   const getCidadePadrao = async () => {
-    const cidadePadrao = 'São Paulo'
-    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadePadrao}&units=metric&appid=${key}&lang=pt_br`;
+    const cidadeInicial = 'São Paulo'
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadeInicial}&units=metric&appid=${key}&lang=pt_br`;
     const res = await fetch(api);
     const data = await res.json();
-    const cidade = {
+    const cidadePadrao = {
       nome: data.name,
       pais: data.sys.country,
       tempAtual: data.main.temp,
@@ -31,11 +41,23 @@ export default function Home() {
       descricao: data.weather[0].description,
       icone: data.weather[0].icon,
     };
-    console.log(cidade)
+
+    setNomeCidade(cidadePadrao.nome)
+    setPais(cidadePadrao.pais)
+    setTemp(cidadePadrao.tempAtual)
+    setDescricao(cidadePadrao.descricao)
+    setUmidade(cidadePadrao.umidade)
+    setPressao(cidadePadrao.pressao)
+    setVento(cidadePadrao.vento)
+    setSensacaoTerm(cidadePadrao.sensacaoTermica)
+
+    console.log(cidadePadrao.nome)
+
   }
-  useEffect() => {
-    
-  }
+  useEffect(() => {
+    console.log('useeffec')
+    getCidadePadrao()
+  })
   const getWeather = async () => {
     console.log("iniciando");
     
@@ -72,7 +94,7 @@ export default function Home() {
               value={cidadePesquisar}
               onChange={(e) => setCidade(e.target.value)}
             />
-            <label id="label " for="inputPesquisa" onClick={getWeather}>
+            <label id="label" onClick={getWeather}>
               <div id="containerIconePesquisa">
                 <SearchIcon id="iconePesquisa" />
               </div>
@@ -101,17 +123,17 @@ export default function Home() {
         <div id="mainLayout">
           <div id="mainContent">
             <div id="nomeCidade">
-              <h1>{cidades[0]}, Brasil</h1>
+              <h1>{nomeCidade}, {pais}</h1>
               <h3>12:30 PM</h3>
             </div>
             <div id="temperaturaContainer">
               <div id="temperaturaContent">
                 <img id="nublado" src={nublado} />
-                <h1 id="txtTemperatura">37°C</h1>
+                <h1 id="txtTemperatura">{temp}°C</h1>
               </div>
               <div id="mensagemClimaContainer">
-                <h1>Muitas Nuvens</h1>
-                <h2>Sensação Térmica</h2>
+                <h1>{descricao}</h1>
+                <h2>Sensação Térmica: {sensacaoTerm}°C</h2>
               </div>
             </div>
             <div id="mensagemDiaContainer">
@@ -125,23 +147,23 @@ export default function Home() {
             <div id="informacoesContainer">
               <div className="itemsInfo">
                 <p>QUALI. DO AR</p>
-                <p>37</p>
+                <p>undefined</p>
               </div>
               <div className="itemsInfo">
                 <p>VENTO</p>
-                <p>20km/h</p>
+                <p>{vento}km/h</p>
               </div>
               <div className="itemsInfo">
                 <p>ÚMIDADE</p>
-                <p>70%</p>
+                <p>{umidade}%</p>
               </div>
               <div className="itemsInfo">
                 <p>PRESSÃO</p>
-                <p>1012 mb</p>
+                <p>{pressao} mb</p>
               </div>
               <div className="itemsInfo">
                 <p>VISIBILIDADE</p>
-                <p>5km/h</p>
+                <p>undefined m/h</p>
               </div>
             </div>
           </div>
