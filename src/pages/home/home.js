@@ -13,7 +13,7 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 export default function Home() {
-  const key = "215e6441a34ddb6eb9419423679629f9";
+  const key = "";
   const [cidadePesquisar, setCidade] = useState("");
 
   const [nomeCidade, setNomeCidade] = useState("");
@@ -154,7 +154,6 @@ export default function Home() {
           <div id="mainContent">
             <div id="nomeCidade">
               <h1>{nomeCidade}, {pais}</h1>
-              <h3>12:30 PM</h3>
             </div>
             <div id="temperaturaContainer">
               <div id="temperaturaContent">
@@ -184,7 +183,7 @@ export default function Home() {
                   <p>VENTO</p>
                   <div className="itemContent">
                     <AirIcon/> 
-                    <p>{vento} km/h</p>
+                    <p>{vento}km/h</p>
                   </div>
               </div>
               <div className="itemsInfo">
@@ -198,7 +197,7 @@ export default function Home() {
                 <p>PRESSÃO</p>
                 <div className="itemContent">
                     <CompressIcon/> 
-                    <p>{pressao} mb</p>
+                    <p>{pressao}mb</p>
                   </div>
     
               </div>
