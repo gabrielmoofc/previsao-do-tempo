@@ -14,8 +14,9 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 
 export default function Home() {
   const key = "";
-  const [cidadePesquisar, setCidade] = useState("");
+  let cidades = []
 
+  const [cidadePesquisar, setCidade] = useState("");
   const [nomeCidade, setNomeCidade] = useState("");
   const [pais, setPais] = useState("");
   const [temp, setTemp] = useState("");
@@ -28,89 +29,78 @@ export default function Home() {
   const [sensacaoTerm, setSensacaoTerm] = useState("")
   const [icone, setIcone] = useState("")
 
-  let cidades = []
+  const addToUseState = (item) => {
+    setNomeCidade(item[0].nome)
+    setPais(item[0].pais)
+    setTemp(item[0].tempAtual)
+    setDescricao(item[0].descricao)
+    setUmidade(item[0].umidade)
+    setPressao(item[0].pressao)
+    setVento(item[0].vento)
+    setSensacaoTerm(item[0].sensacaoTermica)
+    setTempMax(item[0].tempMax)
+    setTempMin(item[0].tempMin)
+    setIcone(`https://openweathermap.org/img/wn/${item[0].icone}.png`)
+  }
 
-  function pegarArr() {
-    console.log(cidades)
+  const UseAPI =  async (cidade, keyAPI) => {
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&appid=${keyAPI}&lang=pt_br`;
+    const res = await fetch(api);
+    const data = await res.json();
+    return data
   }
   const getCidadePadrao = async () => {
     const cidadeInicial = 'São Paulo'
-    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadeInicial}&units=metric&appid=${key}&lang=pt_br`;
-    const res = await fetch(api);
-    const data = await res.json();
 
-    const cidadePadrao = {
-      nome: data.name,
-      pais: data.sys.country,
-      tempAtual: data.main.temp,
-      tempMax: data.main.temp_max,
-      tempMin: data.main.temp_min,
-      umidade: data.main.humidity,
-      pressao: data.main.pressure,
-      vento: data.wind.speed,
-      sensacaoTermica: data.main.feels_like,
-      descricao: data.weather[0].description,
-      icone: data.weather[0].icon,
-
-    };
-
-    cidades.unshift(cidadePadrao)
-
-    setNomeCidade(cidades[0].nome)
-    setPais(cidades[0].pais)
-    setTemp(cidades[0].tempAtual)
-    setDescricao(cidades[0].descricao)
-    setUmidade(cidades[0].umidade)
-    setPressao(cidades[0].pressao)
-    setVento(cidades[0].vento)
-    setSensacaoTerm(cidades[0].sensacaoTermica)
-    setTempMax(cidades[0].tempMax)
-    setTempMin(cidades[0].tempMin)
-    setIcone(`https://openweathermap.org/img/wn/${cidades[0].icone}.png`)
+    UseAPI(cidadeInicial, key).then((data) => {
+      const cidadeTemp = {
+        nome: data.name,
+        pais: data.sys.country,
+        tempAtual: data.main.temp,
+        tempMax: data.main.temp_max,
+        tempMin: data.main.temp_min,
+        umidade: data.main.humidity,
+        pressao: data.main.pressure,
+        vento: data.wind.speed,
+        sensacaoTermica: data.main.feels_like,
+        descricao: data.weather[0].description,
+        icone: data.weather[0].icon,
+       };
+       cidades.unshift(cidadeTemp)
+       addToUseState(cidades)
+    }).catch((err) => {
+      console.log(`Erro com a API! Envie o erro para o email: contactgabrielmoreira@gmail.com.
+      CÓDIGO DO ERRO: ${err}`)
+    })
   }
-
-  useEffect(() => {
-  getCidadePadrao()
-  }, [])
   
   const getWeather = async () => {
-    console.log("iniciando");
-    
-    const api = `https://api.openweathermap.org/data/2.5/weather?q=${cidadePesquisar}&units=metric&appid=${key}&lang=pt_br`;
+    UseAPI(cidadePesquisar, key).then((data) => {
+      const cidadeAdd = {
+        nome: data.name,
+        pais: data.sys.country,
+        tempAtual: data.main.temp,
+        tempMax: data.main.temp_max,
+        tempMin: data.main.temp_min,
+        umidade: data.main.humidity,
+        pressao: data.main.pressure,
+        vento: data.wind.speed,
+        sensacaoTermica: data.main.feels_like,
+        descricao: data.weather[0].description,
+        icone: data.weather[0].icon,
+      };
 
-    const res = await fetch(api);
-    const data = await res.json();
-    const cidadeAdd = {
-      nome: data.name,
-      pais: data.sys.country,
-      tempAtual: data.main.temp,
-      tempMax: data.main.temp_max,
-      tempMin: data.main.temp_min,
-      umidade: data.main.humidity,
-      pressao: data.main.pressure,
-      vento: data.wind.speed,
-      sensacaoTermica: data.main.feels_like,
-      descricao: data.weather[0].description,
-      icone: data.weather[0].icon,
-    };
-    console.log(data)
-    cidades.unshift(cidadeAdd)
-
-    setNomeCidade(cidades[0].nome)
-    setPais(cidades[0].pais)
-    setTemp(cidades[0].tempAtual)
-    setDescricao(cidades[0].descricao)
-    setUmidade(cidades[0].umidade)
-    setPressao(cidades[0].pressao)
-    setVento(cidades[0].vento)
-    setTempMax(cidades[0].tempMax)
-    setTempMin(cidades[0].tempMin)
-    setSensacaoTerm(cidades[0].sensacaoTermica)
-    setIcone(`https://openweathermap.org/img/wn/${cidades[0].icone}.png`)
-    pegarArr()
-
-
+      cidades.unshift(cidadeAdd)
+      addToUseState(cidades) 
+    }).catch((err) => {
+      console.log(`Erro com a API! Envie o erro para o email: contactgabrielmoreira@gmail.com.
+      CÓDIGO DO ERRO: ${err}`)
+    })
   };
+
+  useEffect(() => {
+    getCidadePadrao()
+    }, [])
 
   return (
     <section id="sectionHome" className="nublado" >
