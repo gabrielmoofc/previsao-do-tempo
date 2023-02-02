@@ -6,9 +6,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import clearNight from "../../assets/img/ClearNightV3.svg";
 import Thunderstorms from "../../assets/img/ThunderstormsV2.svg";
 import PrevisaoSemana from "../../components/previsãoSemana/PrevisaoSemana";
+import AirIcon from '@mui/icons-material/Air';
+import WaterIcon from '@mui/icons-material/Water';
+import CompressIcon from '@mui/icons-material/Compress';
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 
 export default function Home() {
-  const key = "28f27af27b41db971000c8cc82329bfb";
+  const key = "215e6441a34ddb6eb9419423679629f9";
   const [cidadePesquisar, setCidade] = useState("");
 
   const [nomeCidade, setNomeCidade] = useState("");
@@ -59,6 +64,8 @@ export default function Home() {
     setPressao(cidades[0].pressao)
     setVento(cidades[0].vento)
     setSensacaoTerm(cidades[0].sensacaoTermica)
+    setTempMax(cidades[0].tempMax)
+    setTempMin(cidades[0].tempMin)
     setIcone(`https://openweathermap.org/img/wn/${cidades[0].icone}.png`)
   }
 
@@ -86,6 +93,7 @@ export default function Home() {
       descricao: data.weather[0].description,
       icone: data.weather[0].icon,
     };
+    console.log(data)
     cidades.unshift(cidadeAdd)
 
     setNomeCidade(cidades[0].nome)
@@ -95,6 +103,8 @@ export default function Home() {
     setUmidade(cidades[0].umidade)
     setPressao(cidades[0].pressao)
     setVento(cidades[0].vento)
+    setTempMax(cidades[0].tempMax)
+    setTempMin(cidades[0].tempMin)
     setSensacaoTerm(cidades[0].sensacaoTermica)
     setIcone(`https://openweathermap.org/img/wn/${cidades[0].icone}.png`)
     pegarArr()
@@ -153,37 +163,44 @@ export default function Home() {
               </div>
               <div id="mensagemClimaContainer">
                 <h1>{descricao}</h1>
-                <h2>Sensação Térmica: {sensacaoTerm}°C</h2>
+                <p id='sensacaoTermicaTxt'>Sensação Térmica {sensacaoTerm}°C</p>
               </div>
             </div>
             <div id="mensagemDiaContainer">
-              <div id="mensagemDia">
-                <p>
-                  lorem loremloremv lorem lorem lorem lorem lorem lorem
-                  loremlorem loremloremlorem lorem loremlorem lorem
-                </p>
+            <div id='tempMaxMin'>
+                <div className='itemContent'>
+                  <KeyboardDoubleArrowUpIcon/> 
+                  <p>Temperatura máxima: {tempMax}</p>
+                </div>
+                <div className='itemContent'>
+                  <KeyboardDoubleArrowDownIcon/> 
+                  <p>Temperatura Mínima: {tempMin}</p>
+                </div>
               </div>
+              
             </div>
             <div id="informacoesContainer">
               <div className="itemsInfo">
-                <p>QUALI. DO AR</p>
-                <p>undefined</p>
-              </div>
-              <div className="itemsInfo">
-                <p>VENTO</p>
-                <p>{vento}km/h</p>
+                  <p>VENTO</p>
+                  <div className="itemContent">
+                    <AirIcon/> 
+                    <p>{vento} km/h</p>
+                  </div>
               </div>
               <div className="itemsInfo">
                 <p>ÚMIDADE</p>
-                <p>{umidade}%</p>
+                <div className="itemContent">
+                    <WaterIcon/> 
+                    <p>{umidade}%</p>
+                  </div>
               </div>
               <div className="itemsInfo">
                 <p>PRESSÃO</p>
-                <p>{pressao} mb</p>
-              </div>
-              <div className="itemsInfo">
-                <p>VISIBILIDADE</p>
-                <p>undefined m/h</p>
+                <div className="itemContent">
+                    <CompressIcon/> 
+                    <p>{pressao} mb</p>
+                  </div>
+    
               </div>
             </div>
           </div>

@@ -26,6 +26,18 @@
     align-items: center;
     justify-content: center;
 }
+#tempMaxMin{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 1.2em;
+}
+#sensacaoTermicaTxt{
+    font-size: 1.2em
+}
 #header{
     width: 100%;
     height: 80px;
@@ -157,8 +169,16 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-around; 
 }
+
+.itemContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
 
 #mensagemDiaContainer{
     display: flex;
